@@ -3,7 +3,7 @@
 
 #include <stddef.h>
 
-typedef void *(*gstd__allocator_t)(size_t);
+typedef void* (*gstd__allocator_t)(size_t);
 typedef void  (*gstd__deallocator_t)(void*);
 
 struct gstd__memmanager {
