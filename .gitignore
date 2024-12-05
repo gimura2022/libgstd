@@ -1,6 +1,7 @@
 *.o
 *.out
 gnub
+
 compile_commands.json
 
 .cache/

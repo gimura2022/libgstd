@@ -1,2 +1,2 @@
-# gtemplate
-Template for my repositories
+# libgstd
+Utility library for my projects

@@ -14,7 +14,7 @@ static const char* cppflags = " -I include ";
 
 static const char* ldflags = " -fPIC ";
 
-static const char* libname = "gtemplate";
+static const char* libname = "gstd";
 
 static char* cc = "cc";
 static char* ar = "ar";
