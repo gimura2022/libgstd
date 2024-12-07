@@ -21,7 +21,7 @@ void gstd__str_from_strref(char* buf, const struct gstd__strref* strref)
 	}
 
 	if (strref->next != NULL)
-		gstd__str_from_strref(buf, strref->next);
+		gstd__str_from_strref(buf + (size_t) (c - strref->start), strref->next);
 }
 
 bool gstd__strref_cmp(const struct gstd__strref* str0, const struct gstd__strref* str1)
@@ -61,11 +61,10 @@ bool gstd__strref_cmp(const struct gstd__strref* str0, const struct gstd__strref
 
 void gstd__strref_cat(struct gstd__strref* dest, struct gstd__strref* src)
 {
-	struct gstd__strref** cur = &dest;
-	struct gstd__strref** prev = NULL;
-	while ((prev = &(*cur)->next) != NULL ? (cur = prev) : false);
+	struct gstd__strref* cur = dest;
+	while (cur->next != NULL) cur = cur->next;
 
-	*cur = src;
+	cur->next = src;
 }
 
 size_t gstd__strref_len(const struct gstd__strref* str)
