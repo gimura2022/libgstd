@@ -1,7 +1,7 @@
 #include <stdbool.h>
 #include <string.h>
 
-#include <gstd/strref.h>
+#include "strref.h"
 
 struct gstd__strref gstd__strref_from_str(const char* str)
 {
