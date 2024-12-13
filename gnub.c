@@ -12,7 +12,7 @@ static const char* cflags_deb = " -O0 -g3 -fsanitize=undefined -fsanitize=addres
 
 static const char* cppflags = " -I include ";
 
-static const char* ldflags = " -fPIC ";
+static const char* ldflags = " -fPIC -lglog ";
 
 static const char* libname = "gstd";
 
