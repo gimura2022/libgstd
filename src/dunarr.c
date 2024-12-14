@@ -14,7 +14,7 @@ void gstd__dunarr_create(struct gstd__dunarr* arr, struct gstd__memmanager* mema
 			memanager);
 
 	if (!res)
-		glog__unreachable(gstd__logger, "default preallocated size is null (why?)");
+		glog__unreachable(gstd__logger, "default preallocated size is zero (why?)");
 }
 
 static struct gstd__dunarr_member* add_member(struct gstd__memmanager* memanager,
@@ -70,7 +70,7 @@ bool gstd__dunarr_enumerate_to_end(struct gstd__dunarr* arr, gstd__dunarr_enumer
 		void* custom_data)
 {
 	struct gstd__dunarr_member *i, *next;
-	for (i = arr->start, next = i->next; i != NULL; i = next, next = i->next) {
+	for (i = arr->start, next = i->next; next != NULL; i = next, next = i->next) {
 		if (!func(i, arr, custom_data))
 			return false;
 	}
@@ -82,7 +82,7 @@ bool gstd__dunarr_enumerate_to_start(struct gstd__dunarr* arr, gstd__dunarr_enum
 		void* custom_data)
 {
 	struct gstd__dunarr_member *i, *prev;
-	for (i = arr->end, prev = i->prev; i != NULL; i = prev, prev = i->prev) {
+	for (i = arr->end, prev = i->prev; prev != NULL; i = prev, prev = i->prev) {
 		if (!func(i, arr, custom_data))
 			return false;
 	}
