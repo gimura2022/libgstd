@@ -26,7 +26,7 @@ struct gstd__dynarr_impl {
 
 struct gstd__dynarr {
 	gstd__dynarr_array_data_t real_arr_data;
-	struct gstd__dynarr_impl* impl;
+	const struct gstd__dynarr_impl* impl;
 };
 
 void gstd__dynarr_free(struct gstd__dynarr* arr);
