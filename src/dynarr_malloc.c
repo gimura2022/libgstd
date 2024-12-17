@@ -84,8 +84,8 @@ static bool impl_pop(gstd__dynarr_array_data_t _data, size_t i)
 	void* new_data       = data->memmanager->allocator(new_data_size * data->element_size);
 
 	memcpy(new_data, data->data, i * data->element_size);
-	memcpy(new_data + (i * data->element_size), data->data + (i * data->element_size),
-			new_data_size * data->element_size - i);
+	memcpy(new_data + data->element_size, data->data + data->element_size,
+			i * data->element_size);
 
 	if (data->data != NULL)
 		data->memmanager->deallocator(data->data);
@@ -104,14 +104,15 @@ static bool impl_push(gstd__dynarr_array_data_t _data, size_t i)
 		return false;
 
 	size_t new_data_size = data->data_size + 1;
-	void* new_data = data->memmanager->allocator(new_data_size * data->element_size);
+	void* new_data       = data->memmanager->allocator(new_data_size * data->element_size);
 
-	memcpy(new_data, data->data, i * data->element_size);
-	memcpy(new_data + ((i + 1) * data->element_size), data->data + ((i + 1) * data->element_size),
-			new_data_size * data->element_size - i);
+	if (data->data != NULL) {
+		memcpy(new_data, data->data, i * data->element_size);
+		memcpy(new_data + (data->element_size * (i + 1)), data->data + data->element_size * i,
+				(data->data_size - i) * data->element_size);
 
-	if (data->data != NULL)
 		data->memmanager->deallocator(data->data);
+	}
 
 	data->data      = new_data;
 	data->data_size = new_data_size;
